@@ -1,7 +1,7 @@
 // Service worker: the app shell offline, a bounded cache for avatars and
 // media, and notification checks in the background where the browser allows
 // (Periodic Background Sync, on installed Chromium apps).
-const VERSION = "v1.10.0";
+const VERSION = "v1.10.1";
 const SHELL = `shell-${VERSION}`;
 const MEDIA = "media-v1";
 const MEDIA_MAX = 400;

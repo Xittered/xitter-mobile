@@ -798,7 +798,7 @@ body.card-open .toast { bottom: auto; top: calc(var(--safe-top) + 72px); }
 	*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* ---- X Money */
+/* ---- Equicoins */
 .n-icon.money { color: var(--repost); }
 .money-slot { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 a.lnk.money-link { display: none; }

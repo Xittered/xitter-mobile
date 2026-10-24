@@ -380,7 +380,7 @@ class App {
 			<nav class="drawer-menu">
 				<button class="press" data-go="profile">${icon("user")}Profile</button>
 				<button class="press" data-go="explore">${icon("globe")}Explore ${esc(a.instance)}</button>
-				${moneyKnown(a)?.on === false ? "" : `<button class="press" data-go="money">${icon("money")}Money</button>`}
+				${moneyKnown(a)?.on === false ? "" : `<button class="press" data-go="money">${icon("money")}Equicoins</button>`}
 				<button class="press" data-switcher>${icon("swap")}Switch account</button>
 				<button class="press" data-go="settings">${icon("gear")}Settings</button>
 			</nav>

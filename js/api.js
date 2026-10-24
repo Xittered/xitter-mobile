@@ -169,7 +169,7 @@ export class Api {
 		return r.data;
 	}
 
-	// ---- X Money: the instance's own play money (404 when it's off or unsupported)
+	// ---- Equicoins: the instance's own play money (404 when it's off or unsupported)
 	money() {
 		return this.request("GET", "/money").then((r) => r.data);
 	}
