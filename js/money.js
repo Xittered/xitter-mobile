@@ -1,4 +1,4 @@
-// X Money: the instance's own play money, with no cash value. The Money
+// Equicoins: the instance's own play money, with no cash value. The Equicoins
 // screen (balance, Send, Request, what's waiting, activity), the send and
 // request sheets, and the cards payment and request links become in posts.
 
@@ -19,7 +19,7 @@ export function parseCents(text) {
 	return cents > 0 ? cents : null;
 }
 
-// whether this account's instance has Money on, remembered for a day
+// whether this account's instance has Equicoins on, remembered for a day
 const supportKey = (key) => `xit.money.${key}`;
 export function moneyKnown(account) {
 	try {
@@ -69,7 +69,7 @@ export function paymentCardHtml(t) {
 		<div class="mc-row">${avatar(t.sender, "av sm")}<span class="mc-arrow">${icon("back", "flip")}</span>${avatar(t.recipient, "av sm")}</div>
 		<div class="mc-title">${t.reversed ? "<s>" : ""}${formatCents(t.amount_cents, { short: true })}${t.reversed ? "</s>" : ""} ${shop ? `at <b>${esc(shop.name)}</b>` : `sent to <b>${esc(who(t.recipient))}</b>`}</div>
 		${t.note ? `<div class="mc-note">${esc(t.note)}</div>` : ""}
-		<div class="mc-foot"><span class="mc-mark">${icon("money")}Money</span><span>${t.reversed ? "Reversed" : ago(t.created_at)}</span></div>
+		<div class="mc-foot"><span class="mc-mark">${icon("money")}Equicoins</span><span>${t.reversed ? "Reversed" : ago(t.created_at)}</span></div>
 	</div>`;
 }
 
@@ -83,7 +83,7 @@ export function requestCardHtml(q) {
 		${q.note ? `<div class="mc-note">${esc(q.note)}</div>` : ""}
 		${q.payer ? "" : q.paid_count ? `<div class="mc-note dim">Paid ${q.paid_count} time${q.paid_count === 1 ? "" : "s"}</div>` : ""}
 		${q.can_pay ? `<button class="pill-btn money-pay" data-act="money-pay" data-rid="${esc(q.id)}" data-to="${esc(q.requester.screen_name)}" data-amount="${q.amount_cents ?? ""}" data-note="${esc(q.note || "")}">Pay</button>` : done ? `<div class="mc-status">${status}</div>` : ""}
-		<div class="mc-foot"><span class="mc-mark">${icon("money")}Money</span><span>${ago(q.created_at)}</span></div>
+		<div class="mc-foot"><span class="mc-mark">${icon("money")}Equicoins</span><span>${ago(q.created_at)}</span></div>
 	</div>`;
 }
 
@@ -155,13 +155,13 @@ export function openSend(ctx, { to = "", amountCents = null, requestId = null, n
 	const fixedAmount = !!(requestId && amountCents);
 	const idem = keyFor();
 	const body = el(`<div class="money-sheet">
-		<div class="money-head"><span class="mc-mark">${icon("money")}Money</span><b>${requestId ? "Pay request" : "Send"}</b><span></span></div>
+		<div class="money-head"><span class="mc-mark">${icon("money")}Equicoins</span><b>${requestId ? "Pay request" : "Send"}</b><span></span></div>
 		<label class="money-field"><span>To</span><input name="to" placeholder="username" autocapitalize="off" autocomplete="off" spellcheck="false" value="${esc(to)}" ${requestId ? "readonly" : ""}></label>
 		<div class="mention-box money-suggest"></div>
 		<div class="money-amount"><span>$</span><input name="amount" inputmode="decimal" placeholder="0" value="${amountCents ? (amountCents / 100).toFixed(2).replace(/\.00$/, "") : ""}" ${fixedAmount ? "readonly" : ""}></div>
 		<label class="money-field"><span>Note</span><input name="note" maxlength="140" placeholder="What's it for?" value="${esc(note)}"></label>
 		<button class="pill-btn solid wide big" data-send disabled>Send</button>
-		<p class="fine center">Instant and free. ${esc(ctx.account.instance)} Money has no cash value.</p>
+		<p class="fine center">Instant and free. ${esc(ctx.account.instance)} Equicoins has no cash value.</p>
 	</div>`);
 	const s = sheet(body, { className: "money-wrap", onClose: () => onDone?.() });
 	const toIn = $("[name=to]", body), amountIn = $("[name=amount]", body), noteIn = $("[name=note]", body), send = $("[data-send]", body);
@@ -193,7 +193,7 @@ export function openSend(ctx, { to = "", amountCents = null, requestId = null, n
 // ask for money: of one account, or of anyone with a "Pay @you" card
 export function openRequest(ctx, { onDone } = {}) {
 	const body = el(`<div class="money-sheet">
-		<div class="money-head"><span class="mc-mark">${icon("money")}Money</span><b>Request</b><span></span></div>
+		<div class="money-head"><span class="mc-mark">${icon("money")}Equicoins</span><b>Request</b><span></span></div>
 		<label class="money-field"><span>From</span><input name="from" placeholder="anyone (a Pay button)" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
 		<div class="mention-box money-suggest"></div>
 		<div class="money-amount"><span>$</span><input name="amount" inputmode="decimal" placeholder="0"></div>
@@ -227,7 +227,7 @@ export function openRequest(ctx, { onDone } = {}) {
 	});
 }
 
-// ---- the Money screen
+// ---- the Equicoins screen
 
 function activityRow(t) {
 	const sent = t.direction === "sent", other = sent ? t.recipient : t.sender;
@@ -256,7 +256,7 @@ export class MoneyPage extends Page {
 	constructor(ctx) {
 		super(ctx);
 		this.el = el(`<section class="page money-page">
-			<header class="bar"><div class="bar-row"><button class="bar-btn back press" data-back aria-label="Back">${icon("back")}</button><div class="bar-title"><b>Money</b><span>${esc(ctx.account.instance)}</span></div><div class="bar-right"></div></div></header>
+			<header class="bar"><div class="bar-row"><button class="bar-btn back press" data-back aria-label="Back">${icon("back")}</button><div class="bar-title"><b>Equicoins</b><span>${esc(ctx.account.instance)}</span></div><div class="bar-right"></div></div></header>
 			<div class="scroll"><div class="money-body"><div class="loading"><div class="spinner"></div></div></div></div></section>`);
 		this.body = $(".money-body", this.el);
 		this.el.addEventListener("click", (e) => this.click(e));
@@ -266,7 +266,7 @@ export class MoneyPage extends Page {
 		try {
 			this.wallet = await moneyStatus(this.ctx);
 		} catch (e) {
-			this.body.innerHTML = `<div class="empty"><b>${e.status === 404 ? "Money isn't here yet" : "Couldn't open Money"}</b><p>${e.status === 404 ? `${esc(this.ctx.account.instance)} doesn't have X Money turned on.` : esc(e.message)}</p></div>`;
+			this.body.innerHTML = `<div class="empty"><b>${e.status === 404 ? "Equicoins isn't here yet" : "Couldn't open Equicoins"}</b><p>${e.status === 404 ? `${esc(this.ctx.account.instance)} doesn't have Equicoins turned on.` : esc(e.message)}</p></div>`;
 			return;
 		}
 		if (!this.wallet.disclaimer_accepted) return this.disclaimer();

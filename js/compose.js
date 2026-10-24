@@ -78,7 +78,7 @@ export function compose(ctx, { replyTo, quote, text = "" } = {}) {
 			<label class="tool" aria-label="Add photos or video">${icon("image")}<input type="file" accept="image/*,video/*" multiple hidden></label>
 			<button class="tool" data-mention aria-label="Mention someone"><span class="at">@</span></button>
 			<button class="tool cw" data-cw aria-label="Content warning" hidden>${icon("cw")}</button>
-			<button class="tool" data-money aria-label="Money" hidden>${icon("money")}</button>
+			<button class="tool" data-money aria-label="Equicoins" hidden>${icon("money")}</button>
 			<span class="tools-end"><span class="count"></span><svg class="ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" class="ring-bg"/><circle cx="15" cy="15" r="12" class="ring-fg" stroke-dasharray="75.4" stroke-dashoffset="75.4"/></svg>${replyTo || quote ? "" : `<i class="tool-sep"></i><button class="tool add-part" aria-label="Add to thread">${icon("plus")}</button>`}</span>
 		</div>
 	</div>`);
@@ -286,7 +286,7 @@ export function compose(ctx, { replyTo, quote, text = "" } = {}) {
 		update();
 	});
 
-	// ---- X Money: a Pay button, or one of your payments, in the post
+	// ---- Equicoins: a Pay button, or one of your payments, in the post
 	const moneyBtn = $("[data-money]", root);
 	const showMoney = (w) => (moneyBtn.hidden = !(w?.on ?? true) || !(w?.accepted ?? w?.disclaimer_accepted));
 	const known = moneyKnown(account);

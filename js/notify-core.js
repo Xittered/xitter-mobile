@@ -84,7 +84,7 @@
 					add({ id: `m-${p.id}`, kind: p.reply_to ? "reply" : "mention", at: Date.parse(p.created_at) || now, post: p });
 				}
 
-			// X Money, where the instance has it and the account accepted its disclaimer:
+			// Equicoins, where the instance has it and the account accepted its disclaimer:
 			// money received, and requests asking it to pay
 			let moneySeen = prev.moneySeen;
 			try {
